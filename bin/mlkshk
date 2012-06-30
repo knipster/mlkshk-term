@@ -146,6 +146,12 @@ class Mlkshk(Termtool):
             if shake['name'] == shake_input:
                 return shake['id']
 
+        if not shake_input.isdigit():
+            resp, cont = client.request('/api/user_name/%s' % shake_input)
+            if resp.status == 200:
+                data=json.loads(cont)
+                return data['shakes'][0]['id']
+            
         return shake_input
 
 
